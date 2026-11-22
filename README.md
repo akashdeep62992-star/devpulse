@@ -2,6 +2,8 @@
 
 DevPulse checks your websites and APIs on a schedule, records response times, opens incidents when a service goes down, sends alerts, and publishes a public status page.
 
+**Live demo:** https://devpulse-hxkl.onrender.com (free tier - first load may take ~30s)
+
 **Stack:** Node.js · Express 5 · MongoDB/Mongoose · React 19 · TanStack Query · Recharts · Tailwind CSS v4 · Vitest
 
 ## Features
