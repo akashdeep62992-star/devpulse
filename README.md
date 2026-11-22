@@ -92,6 +92,15 @@ cd server && npm test
 | GET | `/api/monitors/:id/incidents` | Incident history |
 | GET | `/api/status/:slug` | Public status page data (no login needed) |
 
+## Deploy (Render, free)
+
+The repo includes a [Render Blueprint](render.yaml) that runs the API and serves the built React app from a single web service.
+
+1. Create a free [MongoDB Atlas](https://www.mongodb.com/atlas) cluster, add a database user, allow access from `0.0.0.0/0` and copy the connection string.
+2. In Render: **New > Blueprint**, pick this repo, and paste the Atlas URI as `MONGO_URI`. `JWT_SECRET` is generated automatically.
+
+Note: free Render services sleep after ~15 minutes without traffic, which pauses scheduled checks until the next request.
+
 ## Roadmap
 
 - [ ] Move the scheduler to a **BullMQ + Redis** job queue running in a separate worker process

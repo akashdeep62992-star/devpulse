@@ -1,0 +1,21 @@
+# Render Blueprint: https://render.com/docs/blueprint-spec
+# In Render: New > Blueprint > pick this repo. You'll be asked for MONGO_URI (MongoDB Atlas).
+services:
+  - type: web
+    name: devpulse
+    runtime: node
+    plan: free
+    buildCommand: cd client && npm ci && npm run build && cd ../server && npm ci --omit=dev
+    startCommand: cd server && npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "22"
+      - key: SERVE_CLIENT
+        value: "true"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: MONGO_URI
+        sync: false # paste your MongoDB Atlas connection string

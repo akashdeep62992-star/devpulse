@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -31,6 +33,14 @@ export function createApp() {
   app.use('/api/auth', limiter(20, 15 * 60e3), authRouter);
   app.use('/api/monitors', requireAuth, monitorsRouter);
   app.use('/api/status', statusRouter);
+
+  // In production the API also serves the built React app (single service deploy).
+  if (config.clientDist && fs.existsSync(path.join(config.clientDist, 'index.html'))) {
+    app.use(express.static(config.clientDist, { index: false, maxAge: '1h' }));
+    app.get(/^\/(?!api(\/|$)).*/, (_req, res) => {
+      res.sendFile(path.join(config.clientDist, 'index.html'));
+    });
+  }
 
   app.use(notFound);
   app.use(errorHandler);

@@ -1,4 +1,6 @@
 import 'dotenv/config';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 
@@ -11,6 +13,11 @@ export const config = {
   jwtExpiresIn: '7d',
   bcryptRounds: nodeEnv === 'test' ? 4 : 12,
   clientUrl: process.env.CLIENT_URL || 'http://localhost:5173',
+  // Built client to serve from the API (set SERVE_CLIENT=true, e.g. on Render).
+  clientDist:
+    process.env.SERVE_CLIENT === 'true'
+      ? path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'client', 'dist')
+      : '',
   allowPrivateTargets: process.env.ALLOW_PRIVATE_TARGETS === 'true',
   maxMonitorsPerUser: 20,
   smtp: {
