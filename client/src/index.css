@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply bg-slate-950 text-slate-100 antialiased;
+  }
+}
+
+@utility card {
+  @apply rounded-xl border border-slate-800 bg-slate-900/60;
+}
+@utility input {
+  @apply w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500;
+}
+@utility label {
+  @apply mb-1 block text-xs font-medium text-slate-400;
+}
+@utility btn {
+  @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility btn-primary {
+  @apply btn bg-emerald-500 text-slate-950 hover:bg-emerald-400;
+}
+@utility btn-ghost {
+  @apply btn border border-slate-700 text-slate-200 hover:bg-slate-800;
+}
+@utility btn-danger {
+  @apply btn border border-red-900 text-red-300 hover:bg-red-950;
+}
